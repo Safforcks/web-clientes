@@ -1,33 +1,39 @@
 <div class="container mt-3">
-  <div class="card shadow">
-    <div class="card body p-5">
+    <div class="card shadow">
+        <div class="card-body p-5">
 
-      <h3 class="text-primary">Sistema de controle de clientes</h3>
-      <p class="text-secondary">Treinamento Java WebDevelope - Formação Fullstack COTI Informática</p>
+            <h3 class="text-primary">Sistema de controle de clientes</h3>
+            <p class="text-secondary">Treinamento Java WebDevelope - Formação Fullstack COTI Informática</p>
 
-      <table class="table table-sm table-houver">
-        <thead>
-          <tr>
-            <th>Nome do cliente</th>
-            <th>CPF</th>
-            <th>Email</th>
-            <th>Telefone</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody>
+            <table class="table table-sm table-hover">
+                <thead>
+                    <tr>
+                        <th>Nome do cliente</th>
+                        <th>CPF</th>
+                        <th>Email</th>
+                        <th>Telefone</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for(c of clientes(); track c) {
+                        <tr>
+                            <td>{{ c.nome }}</td>
+                            <td>{{ c.cpf }}</td>
+                            <td>{{ c.email }}</td>
+                            <td>{{ c.telefone }}</td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="5">
+                            Quantidade de clientes: {{ clientes().length }}
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
 
-        </tbody>
-        <tfoot>
-          <tr>
-            <td colspan="5">
-              Quantidade de clientes: 0
-            </td>
-          </tr>
-          
-        </tfoot>
-      </table>
-
-    </div>
-  </div>
+        </div>
+    </div>    
 </div>
