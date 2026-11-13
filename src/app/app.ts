@@ -15,13 +15,16 @@ export class App {
   //Inicializar a bibilioteca HttpClient do angular
   private http = inject(HttpClient);
 
+  //Atribuito privato para armazenar o endereço da API
+  private apiUrl = "http://localhost:8080/api/v1/clientes"
+
   //Função para armazenar os dados dos clientes obtidos
   clientes = signal<any[]>([]);
 
   // Função executada sempre que o componente é inicializado
   ngOnInit() {
     // Fazendo uma requisição HTTP GET para a URL de consultas de clientes
-    this.http.get("http://localhost:8080/api/v1/clientes").subscribe((clientes) => {
+    this.http.get(this.apiUrl).subscribe((clientes) => {
       // Imprimindo os clientes obtidos no console do navegador
       this.clientes.set(clientes as any[])
     });
@@ -37,6 +40,12 @@ export class App {
 
   //Função para realizar o cadastro do cliente
   cadastrarCliente() {
-    console.log(this.formCadastro.value);
+    this.http.post(this.apiUrl, this.formCadastro.value, { responseType: "text"}).subscribe(
+      (mensagem) => {
+        alert(mensagem);
+        this.formCadastro.reset();
+        this.ngOnInit();
+      }
+    )
   }
 }
