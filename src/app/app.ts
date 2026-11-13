@@ -48,4 +48,16 @@ export class App {
       }
     )
   }
+
+  //Função para realizar a exclusão do cliente
+  excluirCliente(id: string) {
+    if(confirm("Deseja realmente excluir este cliente?")) {
+      //Enviar um requisição HTTP DELETE para a API
+      this.http.delete(this.apiUrl + "/" + id, { responseType: "text"})
+      .subscribe((mensagem) => {
+        alert(mensagem);
+        this.ngOnInit();
+      })
+    }
+  }
 }
