@@ -29,7 +29,11 @@
                             <td>{{ c.email }}</td>
                             <td>{{ c.telefone }}</td>
                             <td>
-                                <button class="btn btn-sm btn-shadow btn-primary me-1">
+                                <button 
+                                class="btn btn-sm btn-shadow btn-primary me-1"
+                                data-bs-target="#edicaoCliente"
+                                (click)="obterCliente(c.id)"
+                                >
                                     Editar
                                 </button>
                                 <button 
@@ -131,6 +135,95 @@
                         class="btn btn-sm btn-success shadow" 
                         type="submit"
                         [disabled]="formCadastro.invalid"
+                        >
+                            Realizar cadastro
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="edicaoCliente" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">Cadastro de clientes</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="formEdicao" (ngSubmit)="atualizarCliente()">
+
+                    <input type="hidden" formControlName="id">
+
+                    <div class="mb-3">
+                        <label>Nome de cliente:</label>
+                        <input 
+                        type="text" 
+                        class="form-control" 
+                        placeholder="Digite o nome de cliente"
+                        formControlName="nome"
+                        >
+
+                        @if (formCadastro.get("nome")?.touched && formCadastro.get("nome")?.invalid) {
+                            <div class="text-danger">
+                                O nome do cliente é obrigatório e deve ter pelo menos 6 caracteres.
+                            </div>
+                        }
+                    </div>
+                    <div class="mb-3">
+                        <label>Email:</label>
+                        <input 
+                        type="text" 
+                        class="form-control" 
+                        placeholder="Digite o email de cliente"
+                        formControlName="email"
+                        >
+
+                        @if (formEdicao.get("email")?.touched && formEdicao.get("email")?.invalid) {
+                            <div class="text-danger">
+                                O email do cliente é obrigatório e deve conter um endereço de email válido.
+                            </div>
+                        }
+                    </div>
+                    <div class="mb-3">
+                        <label>CPF:</label>
+                        <input 
+                        type="text" 
+                        class="form-control" 
+                        placeholder="Digite o CPF de cliente"
+                        formControlName="cpf"
+                        >
+
+                        @if (formEdicao.get("cpf")?.touched && formEdicao.get("cpf")?.invalid) {
+                            <div class="text-danger">
+                                O CPF do cliente é obrigatório e deve conter exatamente 11 números. Ex: 44455566699
+                            </div>
+                        }
+                    </div>
+                    <div class="mb-3">
+                        <label>Telefone:</label>
+                        <input 
+                        type="text" 
+                        class="form-control" 
+                        placeholder="Digite o telefone de cliente"
+                        formControlName="telefone"
+                        >
+
+                        @if (formEdicao.get("telefone")?.touched && formEdicao.get("telefone")?.invalid) {
+                            <div class="text-danger">
+                                O telefone do cliente é obrigatório e deve ter pelo menos 11 números. Ex: 21999998888
+                            </div>
+                        }
+                    </div>
+                    <div class="mb-3">
+                        <button 
+                        class="btn btn-sm btn-success shadow" 
+                        type="submit"
+                        [disabled]="formEdicao.invalid"
                         >
                             Realizar cadastro
                         </button>
