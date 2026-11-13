@@ -5,6 +5,12 @@
             <h3 class="text-primary">Sistema de controle de clientes</h3>
             <p class="text-secondary">Treinamento Java WebDevelope - Formação Fullstack COTI Informática</p>
 
+            <div class="mb-3">
+                <button class="btn btn-sm btn-shadow btn-success">
+                    Adicionar cliente
+                </button>
+            </div>
+
             <table class="table table-sm table-hover">
                 <thead>
                     <tr>
@@ -22,6 +28,10 @@
                             <td>{{ c.cpf }}</td>
                             <td>{{ c.email }}</td>
                             <td>{{ c.telefone }}</td>
+                            <td>
+                                <button class="btn btn-sm btn-shadow btn-primary me-1">Editar</button>
+                                <button class="btn btn-sm btn-shadow btn-danger">Excluir</button>
+                            </td>
                         </tr>
                     }
                 </tbody>
