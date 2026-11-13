@@ -38,6 +38,15 @@ export class App {
     telefone: new FormControl("", [Validators.required, Validators.pattern(/^[0-9]{11}$/)])
   });
 
+  //Formulário para edição de clientes
+  formEdicao = new FormGroup({
+    id: new FormControl(""),
+    nome: new FormControl("", [Validators.required, Validators.minLength(6)]),
+    email: new FormControl("", [Validators.required, Validators.email]),
+    cpf: new FormControl("", [Validators.required, Validators.pattern(/^[0-9]{11}$/)]),
+    telefone: new FormControl("", [Validators.required, Validators.pattern(/^[0-9]{11}$/)])
+  });
+
   //Função para realizar o cadastro do cliente
   cadastrarCliente() {
     this.http.post(this.apiUrl, this.formCadastro.value, { responseType: "text"}).subscribe(
@@ -45,8 +54,7 @@ export class App {
         alert(mensagem);
         this.formCadastro.reset();
         this.ngOnInit();
-      }
-    )
+      });
   }
 
   //Função para realizar a exclusão do cliente
@@ -57,7 +65,23 @@ export class App {
       .subscribe((mensagem) => {
         alert(mensagem);
         this.ngOnInit();
-      })
+      });
     }
+  }
+
+
+  obterCliente(id: string) {
+    this.http.get(this.apiUrl + "/" + id)
+      .subscribe((cliente) => {
+        this.formEdicao.patchValue(cliente);
+      });
+  }
+
+  atualizarCliente() {
+    this.http.put(this.apiUrl + "/" + this.formEdicao.value.id, this.formEdicao.value, { responseType: "text"})
+      .subscribe((mensagem) => {
+        alert(mensagem);
+        this.ngOnInit();
+      });
   }
 }
