@@ -1,10 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, signal } from '@angular/core';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { validate } from '@angular/forms/signals';
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -23,5 +25,18 @@ export class App {
       // Imprimindo os clientes obtidos no console do navegador
       this.clientes.set(clientes as any[])
     });
+  }
+
+  //Formulário para cadastro de clientes
+  formCadastro = new FormGroup({
+    nome: new FormControl("", [Validators.required, Validators.minLength(6)]),
+    email: new FormControl("", [Validators.required, Validators.email]),
+    cpf: new FormControl("", [Validators.required, Validators.pattern(/^[0-9]{11}$/)]),
+    telefone: new FormControl("", [Validators.required, Validators.pattern(/^[0-9]{11}$/)])
+  });
+
+  //Função para realizar o cadastro do cliente
+  cadastrarCliente() {
+    console.log(this.formCadastro.value);
   }
 }
