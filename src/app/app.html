@@ -31,6 +31,7 @@
                             <td>
                                 <button 
                                 class="btn btn-sm btn-shadow btn-primary me-1"
+                                data-bs-toggle="modal"
                                 data-bs-target="#edicaoCliente"
                                 (click)="obterCliente(c.id)"
                                 >
@@ -151,7 +152,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5">Cadastro de clientes</h1>
+                <h1 class="modal-title fs-5">Edição de clientes</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -168,7 +169,7 @@
                         formControlName="nome"
                         >
 
-                        @if (formCadastro.get("nome")?.touched && formCadastro.get("nome")?.invalid) {
+                        @if (formEdicao.get("nome")?.touched && formEdicao.get("nome")?.invalid) {
                             <div class="text-danger">
                                 O nome do cliente é obrigatório e deve ter pelo menos 6 caracteres.
                             </div>
@@ -225,7 +226,7 @@
                         type="submit"
                         [disabled]="formEdicao.invalid"
                         >
-                            Realizar cadastro
+                            Salvar alterações
                         </button>
                     </div>
                 </form>
