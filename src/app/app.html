@@ -29,8 +29,15 @@
                             <td>{{ c.email }}</td>
                             <td>{{ c.telefone }}</td>
                             <td>
-                                <button class="btn btn-sm btn-shadow btn-primary me-1">Editar</button>
-                                <button class="btn btn-sm btn-shadow btn-danger">Excluir</button>
+                                <button class="btn btn-sm btn-shadow btn-primary me-1">
+                                    Editar
+                                </button>
+                                <button 
+                                class="btn btn-sm btn-shadow btn-danger" 
+                                (click)="excluirCliente(c.id)"
+                                >
+                                    Excluir
+                                </button>
                             </td>
                         </tr>
                     }
